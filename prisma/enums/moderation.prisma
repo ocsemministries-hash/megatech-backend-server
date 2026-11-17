@@ -1,0 +1,10 @@
+// Moderation enums: public submissions.
+//
+// `source` records where a submission came from: PUBLIC = anonymous website
+// visitor, USER = signed-in portal user. `userId` is null for public
+// submissions and the User id for signed-in ones.
+
+enum SubmissionSource {
+  PUBLIC
+  USER
+}

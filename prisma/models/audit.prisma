@@ -1,0 +1,39 @@
+// Audit trail and verification token models (covers OTP, invite, refresh flows).
+
+model VerificationToken {
+  id             String       @id @default(uuid())
+  tokenType      TokenType
+  channel        TokenChannel @default(EMAIL)
+  adminId        String?
+  admin          Admin?       @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  userId         String?
+  user           User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  identifier     String?
+  tokenHash      String       @unique
+  payload        Json?
+  expiresAt      DateTime
+  consumedAt     DateTime?
+  failedAttempts Int          @default(0)
+  createdAt      DateTime     @default(now())
+
+  @@index([tokenType, identifier])
+  @@index([expiresAt])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  actorId   String?
+  actorType String   @default("ADMIN")
+  action    String
+  resource  String?
+  meta      Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  admin     Admin?   @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([action])
+  @@index([resource, createdAt])
+  @@index([createdAt])
+}

@@ -1,0 +1,13 @@
+// Newsletter enums: mailing-list subscriptions and admin broadcast campaigns.
+
+enum SubscriberStatus {
+  ACTIVE
+  UNSUBSCRIBED
+}
+
+enum CampaignStatus {
+  DRAFT
+  SENDING
+  SENT
+  FAILED
+}

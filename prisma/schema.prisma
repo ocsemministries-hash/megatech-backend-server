@@ -1,0 +1,12 @@
+// Prisma datasource and generator configuration.
+// Models and enums live in ./enums and ./models and are merged at build time.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}

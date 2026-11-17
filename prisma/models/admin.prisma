@@ -1,0 +1,52 @@
+// Admin identity and role-based access control (RBAC) models.
+
+model Admin {
+  id                 String              @id @default(uuid())
+  firstName          String
+  lastName           String
+  email              String              @unique
+  phone              String?
+  passwordHash       String
+  googleSub          String?             @unique
+  status             AdminStatus         @default(PENDING)
+  isSuperAdmin       Boolean             @default(false)
+  roleId             String?
+  role               Role?               @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  lastLoginAt        DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  tokens             VerificationToken[]
+  auditLogs          AuditLog[]
+
+  @@index([email])
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  name        RoleName         @unique
+  description String?
+  isSystem    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  permissions RolePermission[]
+  admins      Admin[]
+}
+
+model Permission {
+  id              String           @id
+  resource        String
+  action          PermissionAction
+  createdAt       DateTime         @default(now())
+  rolePermissions RolePermission[]
+
+  @@unique([resource, action])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}

@@ -1,0 +1,47 @@
+// Shared enum definitions used across the model files.
+
+enum RoleName {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum PermissionAction {
+  VIEW
+  CREATE
+  EXPORT
+  UPDATE
+  DELETE
+}
+
+enum AdminStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum TokenType {
+  OTP
+  VERIFY_EMAIL
+  INVITE
+  REFRESH
+  RESET_PASSWORD
+}
+
+enum TokenChannel {
+  EMAIL
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}

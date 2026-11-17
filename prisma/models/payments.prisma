@@ -1,0 +1,20 @@
+// Payment transactions (Paystack). One row per checkout attempt.
+
+model PaymentTransaction {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Restrict)
+  reference      String        @unique
+  amountMinor    Int
+  currency       String        @default("NGN")
+  purpose        String        @default("GENERAL")
+  status         PaymentStatus @default(PENDING)
+  authorizationUrl String?
+  receiptNo      String?       @unique
+  paidAt         DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}

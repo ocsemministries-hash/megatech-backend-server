@@ -1,0 +1,47 @@
+// Mailing-list subscriptions captured by the site footer + admin broadcasts.
+//
+// A subscriber is one row keyed by email. Same source/userId contract as the
+// other public submissions: PUBLIC + null userId for anonymous visitors, USER
+// + User id for signed-in partners. `unsubscribeToken` powers the one-click
+// opt-out link appended to every campaign email.
+
+model Subscriber {
+  id               String           @id @default(uuid())
+  email            String           @unique
+  name             String?
+  source           SubmissionSource @default(PUBLIC)
+  userId           String?
+  user             User?            @relation("SubscriberUser", fields: [userId], references: [id], onDelete: SetNull)
+  status           SubscriberStatus @default(ACTIVE)
+  /// Opaque token embedded in the unsubscribe URL of campaign emails.
+  unsubscribeToken String           @unique @default(uuid())
+  subscribedAt     DateTime         @default(now())
+  unsubscribedAt   DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([status, createdAt])
+  @@index([userId])
+}
+
+// One row per broadcast composed in the admin. The body is stored as plain
+// text (escaped at render time); counts are filled in as the sender runs.
+
+model NewsletterCampaign {
+  id             String         @id @default(uuid())
+  subject        String
+  body           String
+  status         CampaignStatus @default(DRAFT)
+  /// Recipient cohort. Only "ACTIVE" is supported today.
+  audience       String         @default("ACTIVE")
+  recipientCount Int            @default(0)
+  sentCount      Int            @default(0)
+  failedCount    Int            @default(0)
+  /// Display name of the admin who composed it (denormalized for the list).
+  createdByName  String?
+  sentAt         DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([status, createdAt])
+}

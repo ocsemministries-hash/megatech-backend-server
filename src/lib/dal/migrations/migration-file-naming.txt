@@ -1,0 +1,38 @@
+# Megatech — Migration file naming convention
+
+Applies to both Prisma-managed migrations (`prisma/migrations/`) and any
+hand-written templates under `src/lib/dal/migrations/`.
+
+## Format
+
+```
+<UTC timestamp YYYYMMDDHHMMSS>_<snake_case_verb>[_<table>[_<detail>]]
+```
+
+Verbs: `create_ | add_ | alter_ | drop_ | rename_ | index_`
+
+## Examples
+
+```
+20260902120000_init_auth_rbac
+20260903103000_add_role_id_to_admins
+20260904120000_add_unique_index_on_verification_tokens_token
+20260905100000_drop_legacy_admin_roles
+```
+
+## Rules
+
+1. Prefix MUST be a sortable UTC timestamp `YYYYMMDDHHMMSS` (no separators) —
+   it is what makes migrations order deterministically.
+2. Verb starts with one of `create_ | add_ | drop_ | alter_ | rename_ | index_`.
+3. One logical change per migration. Split mixed changes into separate files.
+4. Destructive migrations MUST carry a header comment describing what is lost
+   and why it is required:
+
+   ```sql
+   -- DESTRUCTIVE: drops <table/column> — <what is lost> — <why required>
+   ```
+
+5. Prisma-managed migrations are generated with `npx prisma migrate dev --name <name>`.
+   Keep the generated directory name aligned with this convention.
+6. Never edit an applied migration after merge — create a new one instead.
