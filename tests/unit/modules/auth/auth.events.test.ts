@@ -67,7 +67,7 @@ describe('auth welcome mail handler', () => {
     const [mail] = getCapturedMails();
     expect(mail?.template).toBe('welcomeAdminMailTemp');
     expect(mail?.subject).toBe('Welcome to Megatech');
-    expect(mail?.html).toContain('http://localhost:5173');
+    expect(mail?.html).toContain('http://localhost:2384');
   });
 });
 

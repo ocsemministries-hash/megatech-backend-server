@@ -37,7 +37,7 @@ describe('SmtpProvider', () => {
       to: 'root@megatech.org',
       subject: 'Welcome to Megatech',
       template: 'welcomeAdminMailTemp',
-      data: ['Root', 'http://localhost:5173'],
+      data: ['Root', 'http://localhost:2384'],
       replyTo: 'ada@example.com',
       cc: ['shared@megatech.org'],
     });
@@ -132,7 +132,7 @@ describe('SmtpProvider', () => {
       to: 'root@megatech.org',
       subject: 'Welcome to Megatech',
       template: 'welcomeAdminMailTemp',
-      data: ['Root', 'http://localhost:5173'],
+      data: ['Root', 'http://localhost:2384'],
     });
 
     expect(nodemailer.createTransport).toHaveBeenCalledWith(
@@ -152,7 +152,7 @@ describe('SmtpProvider', () => {
       to: 'root@megatech.org',
       subject: 'Welcome to Megatech',
       template: 'welcomeAdminMailTemp',
-      data: ['Root', 'http://localhost:5173'],
+      data: ['Root', 'http://localhost:2384'],
     });
 
     const [options] = transport.sendMail.mock.calls[0] as [Record<string, unknown>];

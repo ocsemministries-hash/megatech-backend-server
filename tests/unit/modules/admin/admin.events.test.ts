@@ -13,7 +13,7 @@ describe('admin invite mail handler', () => {
       adminId: 'admin-2',
       email: 'grace@megatech.org',
       roleName: 'EDITOR',
-      inviteUrl: 'http://localhost:5173/admin/invite?token=raw-token',
+      inviteUrl: 'http://localhost:2384/admin/invite?token=raw-token',
       expiresInHours: 72,
     });
 
@@ -21,7 +21,7 @@ describe('admin invite mail handler', () => {
     expect(mail?.template).toBe('adminInviteMailTemp');
     expect(mail?.to).toBe('grace@megatech.org');
     expect(mail?.subject).toBe('You are invited to Megatech admin');
-    expect(mail?.html).toContain('http://localhost:5173/admin/invite?token=raw-token');
+    expect(mail?.html).toContain('http://localhost:2384/admin/invite?token=raw-token');
     expect(mail?.html).toContain('EDITOR');
   });
 });
@@ -36,6 +36,6 @@ describe('admin invite accepted mail handler', () => {
 
     const [mail] = getCapturedMails();
     expect(mail?.template).toBe('welcomeAdminMailTemp');
-    expect(mail?.html).toContain('http://localhost:5173');
+    expect(mail?.html).toContain('http://localhost:2384');
   });
 });

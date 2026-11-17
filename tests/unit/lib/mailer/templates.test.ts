@@ -29,9 +29,9 @@ describe('mail templates', () => {
   });
 
   it('renders a welcome email', () => {
-    const html = welcomeAdminMailTemp('Grace', 'http://localhost:5173');
+    const html = welcomeAdminMailTemp('Grace', 'http://localhost:2384');
     expect(html).toContain('Welcome, Grace');
-    expect(html).toContain('http://localhost:5173');
+    expect(html).toContain('http://localhost:2384');
   });
 
   it('renderTemplate dispatches to the template function', () => {

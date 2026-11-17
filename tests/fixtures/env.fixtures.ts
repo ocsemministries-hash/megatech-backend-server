@@ -20,40 +20,40 @@ export type EnvScenario = {
   expected: EnvExpectation;
 };
 
-const DEV_CORS = ['http://localhost:3000', 'http://localhost:5173'];
+const DEV_CORS = ['http://localhost:2274', 'http://localhost:2384'];
 
 export const ENV_SCENARIOS: EnvScenario[] = [
   {
     name: 'falls back to defaults when no env vars are set',
     overrides: {},
     expected: {
-      PORT: 5000,
+      PORT: 4900,
       NODE_ENV: 'development',
       CORS_ORIGIN: DEV_CORS,
-      ADMIN_WEB_URL: 'http://localhost:5173',
-      FRONTEND_WEB_URL: 'http://localhost:3000',
+      ADMIN_WEB_URL: 'http://localhost:2384',
+      FRONTEND_WEB_URL: 'http://localhost:2274',
     },
   },
   {
     name: 'falls back to default CORS origins when CORS_ORIGIN is blank',
     overrides: { CORS_ORIGIN: '' },
     expected: {
-      PORT: 5000,
+      PORT: 4900,
       NODE_ENV: 'development',
       CORS_ORIGIN: DEV_CORS,
-      ADMIN_WEB_URL: 'http://localhost:5173',
-      FRONTEND_WEB_URL: 'http://localhost:3000',
+      ADMIN_WEB_URL: 'http://localhost:2384',
+      FRONTEND_WEB_URL: 'http://localhost:2274',
     },
   },
   {
     name: 'splits and trims a comma separated CORS_ORIGIN list',
     overrides: { CORS_ORIGIN: 'https://api.example.com, https://admin.example.com' },
     expected: {
-      PORT: 5000,
+      PORT: 4900,
       NODE_ENV: 'development',
       CORS_ORIGIN: ['https://api.example.com', 'https://admin.example.com'],
-      ADMIN_WEB_URL: 'http://localhost:5173',
-      FRONTEND_WEB_URL: 'http://localhost:3000',
+      ADMIN_WEB_URL: 'http://localhost:2384',
+      FRONTEND_WEB_URL: 'http://localhost:2274',
     },
   },
   {
@@ -63,15 +63,15 @@ export const ENV_SCENARIOS: EnvScenario[] = [
       PORT: 8080,
       NODE_ENV: 'production',
       CORS_ORIGIN: DEV_CORS,
-      ADMIN_WEB_URL: 'http://localhost:5173',
-      FRONTEND_WEB_URL: 'http://localhost:3000',
+      ADMIN_WEB_URL: 'http://localhost:2384',
+      FRONTEND_WEB_URL: 'http://localhost:2274',
     },
   },
   {
     name: 'honours explicit frontend URLs',
     overrides: { ADMIN_WEB_URL: 'https://admin.megatech.org', FRONTEND_WEB_URL: 'https://app.megatech.org' },
     expected: {
-      PORT: 5000,
+      PORT: 4900,
       NODE_ENV: 'development',
       CORS_ORIGIN: DEV_CORS,
       ADMIN_WEB_URL: 'https://admin.megatech.org',

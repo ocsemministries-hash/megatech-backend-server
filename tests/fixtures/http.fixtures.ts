@@ -1,4 +1,4 @@
-export const ALLOWED_ORIGIN = 'http://localhost:3000';
+export const ALLOWED_ORIGIN = 'http://localhost:2274';
 export const DISALLOWED_ORIGIN = 'https://malicious.example.com';
 
 export const ROUTES = {

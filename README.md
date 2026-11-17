@@ -99,9 +99,9 @@ Copy the `.env.example` values into a `.env` file at the project root:
 
 | Variable                | Required | Default                 | Description                                                        |
 | ----------------------- | -------- | ----------------------- | ------------------------------------------------------------------ |
-| `PORT`                  | No       | `5000`                  | Port the server listens on                                         |
+| `PORT`                  | No       | `4900`                  | Port the server listens on                                         |
 | `NODE_ENV`              | No       | `development`           | `development`, `test`, or `production`                             |
-| `CORS_ORIGIN`           | No       | `http://localhost:3000,http://localhost:5173` | Comma-separated list of allowed CORS origins                       |
+| `CORS_ORIGIN`           | No       | `http://localhost:2274,http://localhost:2384` | Comma-separated list of allowed CORS origins                       |
 | `DATABASE_URL`          | Yes      | —                       | PostgreSQL connection string used by Prisma                        |
 | `DIRECT_URL`            | Yes      | —                       | Direct (non-pooled) PostgreSQL URL                                 |
 | `ADMIN_MAILS`           | Yes      | —                       | Comma-separated admin emails: bootstrap gate **and** notification recipients |
@@ -114,8 +114,8 @@ Copy the `.env.example` values into a `.env` file at the project root:
 | `INVITE_TTL_HOURS`      | No       | `72`                    | Admin invite link validity                                         |
 | `COOKIE_SECURE`         | No       | prod: `true`            | Force the `Secure` cookie flag                                     |
 | `COOKIE_DOMAIN`         | No       | —                       | Cookie domain                                                      |
-| `ADMIN_WEB_URL`         | No       | `http://localhost:5173` | Admin app origin, used in invite/verify links                      |
-| `FRONTEND_WEB_URL`      | No       | `http://localhost:3000` | Web app origin, used in welcome and payment-return links           |
+| `ADMIN_WEB_URL`         | No       | `http://localhost:2384` | Admin app origin, used in invite/verify links                      |
+| `FRONTEND_WEB_URL`      | No       | `http://localhost:2274` | Web app origin, used in welcome and payment-return links           |
 | `GOOGLE_CLIENT_ID`      | No       | —                       | Google client id used to verify GIS ID tokens                      |
 | `EMAIL_DELIVERY_MODE`   | No       | `HYBRID_FALLBACK`       | `REST`, `SMTP` or `HYBRID_FALLBACK` (REST first, SMTP fallback)    |
 | `MAILTRAP_API_TOKEN`    | No       | —                       | Mailtrap Email Sending API token                                   |
@@ -173,7 +173,7 @@ or `node dist/deploy.js` (compiled), which exits non-zero on failure for
 pipeline use.
 
 The server logs its startup line on the configured port. Interactive API docs are
-served at `http://localhost:<PORT>/docs`, the raw spec at `/docs-json`, and a
+served at `http://localhost:4900/docs`, the raw spec at `/docs-json`, and a
 health check at `GET /health`.
 
 ## API Overview

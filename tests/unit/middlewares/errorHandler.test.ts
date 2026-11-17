@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const state = vi.hoisted(() => ({
-  env: { NODE_ENV: 'test', PORT: 5000, CORS_ORIGIN: ['http://localhost:3000'] },
+  env: { NODE_ENV: 'test', PORT: 4900, CORS_ORIGIN: ['http://localhost:2274'] },
   logger: { error: vi.fn(), info: vi.fn(), warn: vi.fn(), debug: vi.fn() },
 }));
 

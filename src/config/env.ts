@@ -12,7 +12,7 @@ const parseList = (raw?: string): string[] =>
 
 const parseCorsOrigins = (rawOrigins?: string): string[] => {
   const parsed = parseList(rawOrigins);
-  return parsed.length > 0 ? parsed : ['http://localhost:3000', 'http://localhost:5173'];
+  return parsed.length > 0 ? parsed : ['http://localhost:2274', 'http://localhost:2384'];
 };
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -35,7 +35,7 @@ const parseDeliveryMode = (raw?: string): EmailDeliveryModeEnv => {
 };
 
 export const ENV = {
-  PORT: Number(process.env.PORT) || 5000,
+  PORT: Number(process.env.PORT) || 4900,
   NODE_ENV: process.env.NODE_ENV || 'development',
   CORS_ORIGIN: parseCorsOrigins(process.env.CORS_ORIGIN),
   // Database
@@ -57,10 +57,10 @@ export const ENV = {
   COOKIE_SECURE: isProduction ? process.env.COOKIE_SECURE !== 'false' : process.env.COOKIE_SECURE === 'true',
   COOKIE_DOMAIN: process.env.COOKIE_DOMAIN || undefined,
   // Frontends
-  ADMIN_WEB_URL: process.env.ADMIN_WEB_URL || 'http://localhost:5173',
-  FRONTEND_WEB_URL: process.env.FRONTEND_WEB_URL || 'http://localhost:3000',
+  ADMIN_WEB_URL: process.env.ADMIN_WEB_URL || 'http://localhost:2384',
+  FRONTEND_WEB_URL: process.env.FRONTEND_WEB_URL || 'http://localhost:2274',
   // Public base URL of this API — used for links embedded in emails (e.g. one-click unsubscribe).
-  API_PUBLIC_URL: process.env.API_PUBLIC_URL || `http://localhost:${Number(process.env.PORT) || 5000}`,
+  API_PUBLIC_URL: process.env.API_PUBLIC_URL || `http://localhost:${Number(process.env.PORT) || 4900}`,
   // Google sign-in (GIS ID tokens verified server-side)
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || '',
   // Core mailing system (shared notification infrastructure)
